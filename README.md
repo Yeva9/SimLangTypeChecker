@@ -1,3 +1,5 @@
+### README
+
 # SimLangTypeChecker
 
 ## Program Overview
@@ -31,3 +33,100 @@ python main.py
 ```
 
 By following these steps, you will be able to execute the SimLang programs and see the results, including any type errors detected during the type-checking phase.
+
+## Example Output
+
+```sh
+python main.py
+```
+
+Output:
+
+```
+Checking program 1:
+
+
+    let x: int = 5;
+    let y: int = x + 10;
+    let z: bool = true && false;
+    print(x + y);
+    print(z);
+    
+No type errors found. Executing program...
+
+15
+False
+
+========================================
+
+Checking program 2:
+
+
+    let a: int = 3;
+    let b: int = 7;
+    let c: int = a + b;
+    print(c);
+    
+No type errors found. Executing program...
+
+10
+
+========================================
+
+Checking program 3:
+
+
+    let p: bool = true;
+    let q: bool = false;
+    let r: bool = p && q;
+    print(r);
+    
+No type errors found. Executing program...
+
+False
+
+========================================
+
+Checking program 4:
+
+
+    let x: int = 5;
+    let y: bool = x + 10;
+    print(y);
+    
+Type error: variable 'y' declared as bool but assigned a int
+Type errors were found in the program.
+
+
+========================================
+
+Checking program 5:
+
+
+    let x: int = 5;
+    let y: int = x - 3;
+    let z: int = y * 2;
+    print(z);
+    
+No type errors found. Executing program...
+
+4
+
+========================================
+
+Checking program 6:
+
+
+    let x: int = 5;
+    let y: int = 10;
+    let result: bool = x + y;
+    print(result);
+    
+Type error: variable 'result' declared as bool but assigned a int
+Type errors were found in the program.
+
+
+========================================
+```
+
+In this output, the program checks several SimLang programs for type errors and executes those without errors. For programs with type errors, it reports the specific issues found.
