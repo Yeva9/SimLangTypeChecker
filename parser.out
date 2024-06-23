@@ -1,0 +1,434 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement_list statement
+Rule 3     statement_list -> statement
+Rule 4     statement -> let_statement
+Rule 5     statement -> print_statement
+Rule 6     let_statement -> LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON
+Rule 7     print_statement -> PRINT LPAREN expression RPAREN SEMICOLON
+Rule 8     expression -> expression INT_OP expression
+Rule 9     expression -> expression BOOL_OP expression
+Rule 10    expression -> NOT expression
+Rule 11    expression -> LPAREN expression RPAREN
+Rule 12    expression -> IDENTIFIER
+Rule 13    expression -> INT
+Rule 14    expression -> BOOL
+
+Terminals, with rules where they appear
+
+BOOL                 : 14
+BOOL_OP              : 9
+COLON                : 6
+EQUALS               : 6
+IDENTIFIER           : 6 12
+INT                  : 13
+INT_OP               : 8
+LET                  : 6
+LPAREN               : 7 11
+NOT                  : 10
+PRINT                : 7
+RPAREN               : 7 11
+SEMICOLON            : 6 7
+TYPE                 : 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 6 7 8 8 9 9 10 11
+let_statement        : 4
+print_statement      : 5
+program              : 0
+statement            : 2 3
+statement_list       : 1 2
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . let_statement
+    (5) statement -> . print_statement
+    (6) let_statement -> . LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON
+    (7) print_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
+
+    LET             shift and go to state 6
+    PRINT           shift and go to state 7
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    let_statement                  shift and go to state 4
+    print_statement                shift and go to state 5
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . let_statement
+    (5) statement -> . print_statement
+    (6) let_statement -> . LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON
+    (7) print_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    LET             shift and go to state 6
+    PRINT           shift and go to state 7
+
+    statement                      shift and go to state 8
+    let_statement                  shift and go to state 4
+    print_statement                shift and go to state 5
+
+state 3
+
+    (3) statement_list -> statement .
+
+    LET             reduce using rule 3 (statement_list -> statement .)
+    PRINT           reduce using rule 3 (statement_list -> statement .)
+    $end            reduce using rule 3 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> let_statement .
+
+    LET             reduce using rule 4 (statement -> let_statement .)
+    PRINT           reduce using rule 4 (statement -> let_statement .)
+    $end            reduce using rule 4 (statement -> let_statement .)
+
+
+state 5
+
+    (5) statement -> print_statement .
+
+    LET             reduce using rule 5 (statement -> print_statement .)
+    PRINT           reduce using rule 5 (statement -> print_statement .)
+    $end            reduce using rule 5 (statement -> print_statement .)
+
+
+state 6
+
+    (6) let_statement -> LET . IDENTIFIER COLON TYPE EQUALS expression SEMICOLON
+
+    IDENTIFIER      shift and go to state 9
+
+
+state 7
+
+    (7) print_statement -> PRINT . LPAREN expression RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 10
+
+
+state 8
+
+    (2) statement_list -> statement_list statement .
+
+    LET             reduce using rule 2 (statement_list -> statement_list statement .)
+    PRINT           reduce using rule 2 (statement_list -> statement_list statement .)
+    $end            reduce using rule 2 (statement_list -> statement_list statement .)
+
+
+state 9
+
+    (6) let_statement -> LET IDENTIFIER . COLON TYPE EQUALS expression SEMICOLON
+
+    COLON           shift and go to state 11
+
+
+state 10
+
+    (7) print_statement -> PRINT LPAREN . expression RPAREN SEMICOLON
+    (8) expression -> . expression INT_OP expression
+    (9) expression -> . expression BOOL_OP expression
+    (10) expression -> . NOT expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . IDENTIFIER
+    (13) expression -> . INT
+    (14) expression -> . BOOL
+
+    NOT             shift and go to state 14
+    LPAREN          shift and go to state 12
+    IDENTIFIER      shift and go to state 15
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+
+    expression                     shift and go to state 13
+
+state 11
+
+    (6) let_statement -> LET IDENTIFIER COLON . TYPE EQUALS expression SEMICOLON
+
+    TYPE            shift and go to state 18
+
+
+state 12
+
+    (11) expression -> LPAREN . expression RPAREN
+    (8) expression -> . expression INT_OP expression
+    (9) expression -> . expression BOOL_OP expression
+    (10) expression -> . NOT expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . IDENTIFIER
+    (13) expression -> . INT
+    (14) expression -> . BOOL
+
+    NOT             shift and go to state 14
+    LPAREN          shift and go to state 12
+    IDENTIFIER      shift and go to state 15
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+
+    expression                     shift and go to state 19
+
+state 13
+
+    (7) print_statement -> PRINT LPAREN expression . RPAREN SEMICOLON
+    (8) expression -> expression . INT_OP expression
+    (9) expression -> expression . BOOL_OP expression
+
+    RPAREN          shift and go to state 20
+    INT_OP          shift and go to state 21
+    BOOL_OP         shift and go to state 22
+
+
+state 14
+
+    (10) expression -> NOT . expression
+    (8) expression -> . expression INT_OP expression
+    (9) expression -> . expression BOOL_OP expression
+    (10) expression -> . NOT expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . IDENTIFIER
+    (13) expression -> . INT
+    (14) expression -> . BOOL
+
+    NOT             shift and go to state 14
+    LPAREN          shift and go to state 12
+    IDENTIFIER      shift and go to state 15
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+
+    expression                     shift and go to state 23
+
+state 15
+
+    (12) expression -> IDENTIFIER .
+
+    RPAREN          reduce using rule 12 (expression -> IDENTIFIER .)
+    INT_OP          reduce using rule 12 (expression -> IDENTIFIER .)
+    BOOL_OP         reduce using rule 12 (expression -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 12 (expression -> IDENTIFIER .)
+
+
+state 16
+
+    (13) expression -> INT .
+
+    RPAREN          reduce using rule 13 (expression -> INT .)
+    INT_OP          reduce using rule 13 (expression -> INT .)
+    BOOL_OP         reduce using rule 13 (expression -> INT .)
+    SEMICOLON       reduce using rule 13 (expression -> INT .)
+
+
+state 17
+
+    (14) expression -> BOOL .
+
+    RPAREN          reduce using rule 14 (expression -> BOOL .)
+    INT_OP          reduce using rule 14 (expression -> BOOL .)
+    BOOL_OP         reduce using rule 14 (expression -> BOOL .)
+    SEMICOLON       reduce using rule 14 (expression -> BOOL .)
+
+
+state 18
+
+    (6) let_statement -> LET IDENTIFIER COLON TYPE . EQUALS expression SEMICOLON
+
+    EQUALS          shift and go to state 24
+
+
+state 19
+
+    (11) expression -> LPAREN expression . RPAREN
+    (8) expression -> expression . INT_OP expression
+    (9) expression -> expression . BOOL_OP expression
+
+    RPAREN          shift and go to state 25
+    INT_OP          shift and go to state 21
+    BOOL_OP         shift and go to state 22
+
+
+state 20
+
+    (7) print_statement -> PRINT LPAREN expression RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 26
+
+
+state 21
+
+    (8) expression -> expression INT_OP . expression
+    (8) expression -> . expression INT_OP expression
+    (9) expression -> . expression BOOL_OP expression
+    (10) expression -> . NOT expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . IDENTIFIER
+    (13) expression -> . INT
+    (14) expression -> . BOOL
+
+    NOT             shift and go to state 14
+    LPAREN          shift and go to state 12
+    IDENTIFIER      shift and go to state 15
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+
+    expression                     shift and go to state 27
+
+state 22
+
+    (9) expression -> expression BOOL_OP . expression
+    (8) expression -> . expression INT_OP expression
+    (9) expression -> . expression BOOL_OP expression
+    (10) expression -> . NOT expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . IDENTIFIER
+    (13) expression -> . INT
+    (14) expression -> . BOOL
+
+    NOT             shift and go to state 14
+    LPAREN          shift and go to state 12
+    IDENTIFIER      shift and go to state 15
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+
+    expression                     shift and go to state 28
+
+state 23
+
+    (10) expression -> NOT expression .
+    (8) expression -> expression . INT_OP expression
+    (9) expression -> expression . BOOL_OP expression
+
+  ! shift/reduce conflict for INT_OP resolved as shift
+  ! shift/reduce conflict for BOOL_OP resolved as shift
+    RPAREN          reduce using rule 10 (expression -> NOT expression .)
+    SEMICOLON       reduce using rule 10 (expression -> NOT expression .)
+    INT_OP          shift and go to state 21
+    BOOL_OP         shift and go to state 22
+
+  ! INT_OP          [ reduce using rule 10 (expression -> NOT expression .) ]
+  ! BOOL_OP         [ reduce using rule 10 (expression -> NOT expression .) ]
+
+
+state 24
+
+    (6) let_statement -> LET IDENTIFIER COLON TYPE EQUALS . expression SEMICOLON
+    (8) expression -> . expression INT_OP expression
+    (9) expression -> . expression BOOL_OP expression
+    (10) expression -> . NOT expression
+    (11) expression -> . LPAREN expression RPAREN
+    (12) expression -> . IDENTIFIER
+    (13) expression -> . INT
+    (14) expression -> . BOOL
+
+    NOT             shift and go to state 14
+    LPAREN          shift and go to state 12
+    IDENTIFIER      shift and go to state 15
+    INT             shift and go to state 16
+    BOOL            shift and go to state 17
+
+    expression                     shift and go to state 29
+
+state 25
+
+    (11) expression -> LPAREN expression RPAREN .
+
+    RPAREN          reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    INT_OP          reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    BOOL_OP         reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 11 (expression -> LPAREN expression RPAREN .)
+
+
+state 26
+
+    (7) print_statement -> PRINT LPAREN expression RPAREN SEMICOLON .
+
+    LET             reduce using rule 7 (print_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    PRINT           reduce using rule 7 (print_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    $end            reduce using rule 7 (print_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
+
+
+state 27
+
+    (8) expression -> expression INT_OP expression .
+    (8) expression -> expression . INT_OP expression
+    (9) expression -> expression . BOOL_OP expression
+
+  ! shift/reduce conflict for INT_OP resolved as shift
+  ! shift/reduce conflict for BOOL_OP resolved as shift
+    RPAREN          reduce using rule 8 (expression -> expression INT_OP expression .)
+    SEMICOLON       reduce using rule 8 (expression -> expression INT_OP expression .)
+    INT_OP          shift and go to state 21
+    BOOL_OP         shift and go to state 22
+
+  ! INT_OP          [ reduce using rule 8 (expression -> expression INT_OP expression .) ]
+  ! BOOL_OP         [ reduce using rule 8 (expression -> expression INT_OP expression .) ]
+
+
+state 28
+
+    (9) expression -> expression BOOL_OP expression .
+    (8) expression -> expression . INT_OP expression
+    (9) expression -> expression . BOOL_OP expression
+
+  ! shift/reduce conflict for INT_OP resolved as shift
+  ! shift/reduce conflict for BOOL_OP resolved as shift
+    RPAREN          reduce using rule 9 (expression -> expression BOOL_OP expression .)
+    SEMICOLON       reduce using rule 9 (expression -> expression BOOL_OP expression .)
+    INT_OP          shift and go to state 21
+    BOOL_OP         shift and go to state 22
+
+  ! INT_OP          [ reduce using rule 9 (expression -> expression BOOL_OP expression .) ]
+  ! BOOL_OP         [ reduce using rule 9 (expression -> expression BOOL_OP expression .) ]
+
+
+state 29
+
+    (6) let_statement -> LET IDENTIFIER COLON TYPE EQUALS expression . SEMICOLON
+    (8) expression -> expression . INT_OP expression
+    (9) expression -> expression . BOOL_OP expression
+
+    SEMICOLON       shift and go to state 30
+    INT_OP          shift and go to state 21
+    BOOL_OP         shift and go to state 22
+
+
+state 30
+
+    (6) let_statement -> LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON .
+
+    LET             reduce using rule 6 (let_statement -> LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON .)
+    PRINT           reduce using rule 6 (let_statement -> LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON .)
+    $end            reduce using rule 6 (let_statement -> LET IDENTIFIER COLON TYPE EQUALS expression SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for INT_OP in state 23 resolved as shift
+WARNING: shift/reduce conflict for BOOL_OP in state 23 resolved as shift
+WARNING: shift/reduce conflict for INT_OP in state 27 resolved as shift
+WARNING: shift/reduce conflict for BOOL_OP in state 27 resolved as shift
+WARNING: shift/reduce conflict for INT_OP in state 28 resolved as shift
+WARNING: shift/reduce conflict for BOOL_OP in state 28 resolved as shift
